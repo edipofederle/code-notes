@@ -29,4 +29,4 @@
      (let [notes (extract-from-file file)]
        (if-not (empty? notes)
          (conj acc {file notes})
-         acc))) [] (regex-file-seq #".*\.rb" (clojure.java.io/file dir-project))))
+         acc))) [] (regex-file-seq #".*\.rb" dir-project)))
