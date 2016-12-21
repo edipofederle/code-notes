@@ -3,8 +3,6 @@
   (use hiccup.core
        clojure.java.io))
 
-;; (def notes (core/all-notes "/Users/edipofederle/code/tougg-orders"))
-
 (defn line-code
   [note]
   (-> note
@@ -30,7 +28,7 @@
 
 (def header
   [:head
-   [:link {:href "bulma.css", :type "text/css", :rel "stylesheet"}]])
+   [:link {:href "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.2.3/css/bulma.min.css" :type "text/css" :rel "stylesheet"}]])
 
 (defn generate-html
   [notes]
@@ -39,6 +37,6 @@
    (html-notes notes)))
 
 (defn output-html
-  [notes]
-  (with-open [wrtr (writer "/Users/edipofederle/Desktop/output.html" :append false)]
+  [notes path-to-save-output]
+  (with-open [wrtr (writer (str path-to-save-output "/output.html") :append false)]
     (.write wrtr (generate-html notes))))

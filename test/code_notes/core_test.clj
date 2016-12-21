@@ -12,7 +12,9 @@
     (is (= "#fix me TODO this" (extract-comment-todo-from-line "#TODO #fix me TODO this")))
     (is (= "remove this" (extract-comment-todo-from-line "x = 10 #TODO remove this")))
     (is (= nil (extract-comment-todo-from-line "end")))
-    (is (= nil (extract-comment-todo-from-line "if x = 10 && >= 5")))))
+    (is (= nil (extract-comment-todo-from-line "if x = 10 && >= 5")))
+    (is (= nil (extract-comment-todo-from-line "#TODO")))
+    (is (= nil (extract-comment-todo-from-line "            #TODO      ")))))
 
 
  (deftest extract-from-file-test

@@ -3,9 +3,10 @@
             [clojure.string :as str]))
 
 (defn extract-comment-todo-from-line [line]
-  (if (str/includes? line "TODO")
-    (subs line (+ 5 (.indexOf line "TODO")) (count line))
-    nil))
+  (let [line (str/trim line)]
+    (if (and (str/includes? line "TODO") (> (count (str/split line #"\s")) 1))
+      (subs line (+ 5 (.indexOf line "TODO")) (count line))
+      nil)))
 
 (defn extract-from-file [file-path]
   (let [lines (str/split-lines (slurp file-path))]
@@ -20,7 +21,7 @@
 
 (defn regex-file-seq
   [re dir]
-  (map  (fn [file] (.getPath file)) (filter #(re-find re (.getPath %)) (file-seq (io/file dir)))))
+  (map (fn [file] (.getPath file)) (filter #(re-find re (.getPath %)) (file-seq (io/file dir)))))
 
 (defn all-notes
   [dir-project ]
